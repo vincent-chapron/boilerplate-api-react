@@ -1,6 +1,9 @@
 'use strict';
 
 const fs = require('fs');
+const history = require('connect-history-api-fallback');
+
+const apiConfiguration = require('./api');
 
 module.exports = class ServerConfiguration {
 
@@ -30,6 +33,17 @@ module.exports = class ServerConfiguration {
                 next();
             }
         }
+    }
+
+    historyApiFallback() {
+        let matchRoutes = new RegExp(`^${apiConfiguration.prefix}/?.*$`);
+
+        return history({
+            rewrites: [{
+                from: matchRoutes,
+                to: context => context.parsedUrl.path
+            }]
+        })
     }
 
 }
