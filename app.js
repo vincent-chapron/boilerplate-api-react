@@ -25,9 +25,9 @@ app.use(frontRoutes);
 app.use(express.static(path.join(__dirname, 'front', 'public')));
 
 if (serverConfiguration.credentials !== null) {
-	console.log(serverConfiguration.credentials);
-	const httpsServer = https.createServer(serverConfiguration.credentials, app);
-	httpsServer.listen(serverConfiguration.httpsPort);
+    console.log(serverConfiguration.credentials);
+    const httpsServer = https.createServer(serverConfiguration.credentials, app);
+    httpsServer.listen(serverConfiguration.httpsPort);
 }
 
 const httpServer = http.createServer(app);
