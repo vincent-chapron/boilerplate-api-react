@@ -1,35 +1,31 @@
-var fs = require('fs');
+'use strict';
+
+const path = require('path');
 const http = require('http');
 const https = require('https');
-const privateKey  = fs.readFileSync('/etc/letsencrypt/live/chapron.io/privkey.pem', 'utf8');
-const certificate = fs.readFileSync('/etc/letsencrypt/live/chapron.io/cert.pem', 'utf8');
-
-const request = require('request');
-
-const credentials = {key: privateKey, cert: certificate};
 const express = require('express');
 const bodyParser = require('body-parser');
+
+const serverConfigurationClass = require('./configuration/server');
+const apiRoutes = require('./api/routes');
+const frontRoutes = require('./front/routes');
+
 const app = express();
+const serverConfiguration = new serverConfigurationClass();
 
-app.use((req, res, next) => {
-	if (req.protocol === 'http') {
-		res.writeHead(301, {'Location': `https://${req.get('host')}${req.url}`});
-		res.end();
-	} else {
-		next();
-	}
-});
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'front', 'views'));
+
+app.use(serverConfiguration.redirectToSSL());
 app.use(bodyParser.json());
+app.use('/api', apiRoutes);
+app.use('/', frontRoutes);
 
-/*
- * LOGIC HERE 
- */
-app.get('/', (req, res, next) => {
-	res.json({success: true});
-});
+if (serverConfiguration.credentials !== null) {
+	console.log(serverConfiguration.credentials);
+	const httpsServer = https.createServer(serverConfiguration.credentials, app);
+	httpsServer.listen(serverConfiguration.httpsPort);
+}
 
 const httpServer = http.createServer(app);
-const httpsServer = https.createServer(credentials, app);
-
-httpServer.listen(80);
-httpsServer.listen(443);
+httpServer.listen(serverConfiguration.httpPort);
