@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "concurrently \"nodemon --ignore front/src --ignore front/public app.js\" \"webpack --watch\"",
-    "build:prod": "webpack --config webpack.production.config.js"
+    "build:prod": "webpack --config webpack.production.config.js",
+    "serve": "npm run build:prod && echo build done. && node app.js"
   },
   "keywords": [],
   "author": "",
