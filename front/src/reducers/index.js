@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 
+import hello from './hello';
+
 const rootReducer = combineReducers({
-    state: (state = {}) => state
+    hello
 });
 
 export default rootReducer;

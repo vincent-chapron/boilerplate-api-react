@@ -2,10 +2,13 @@
 
 const express = require('express');
 
+const helloRoutes = require('./routes/hello');
+
 let routes = express.Router();
 
-routes.get('/', (req, res, next) => {
-    res.json({success: true});
-});
+/**
+ * USE YOUR ROUTES HERE
+ */
+routes.use('/hello', helloRoutes);
 
 module.exports = routes;
