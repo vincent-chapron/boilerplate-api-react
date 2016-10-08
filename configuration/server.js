@@ -15,8 +15,8 @@ module.exports = class ServerConfiguration {
         this.httpPort = process.env.APP_PORT || '8080';
         this.httpsPort = process.env.APP_SSL_PORT || '8443';
         try {
-            let privateKey  = fs.readFileSync(this.privateKeyFilePath, this.encoding);
-            let certificate = fs.readFileSync(this.certificateFilePath, this.encoding);
+            let privateKey  = fs.readFileSync(privateKeyFilePath, this.encoding);
+            let certificate = fs.readFileSync(certificateFilePath, this.encoding);
 
             this.credentials = {key: privateKey, cert: certificate};
         } catch (exception) {
