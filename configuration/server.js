@@ -3,9 +3,9 @@
 const fs = require('fs');
 const history = require('connect-history-api-fallback');
 
-const apiConfiguration = require('./api');
+const apiConfiguration = require('./api'); 
 
-module.exports = class ServerConfiguration {
+class ServerConfiguration {
 
     constructor() {
         let encoding = process.env.APP_ENCODING || 'utf-8';
@@ -43,7 +43,9 @@ module.exports = class ServerConfiguration {
                 from: matchRoutes,
                 to: context => context.parsedUrl.path
             }]
-        })
+        });
     }
 
 }
+
+module.exports = new ServerConfiguration();
