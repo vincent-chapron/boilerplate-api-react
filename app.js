@@ -2,7 +2,7 @@
 
 const path = require('path');
 const http = require('http');
-const http2 = require('http2');
+const https = require('https');
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -24,7 +24,7 @@ app.use(frontRoutes);
 app.use(express.static(path.join(__dirname, 'front', 'public')));
 
 if (serverConfiguration.credentials !== null) {
-    const httpsServer = http2.createServer(serverConfiguration.credentials, app);
+    const httpsServer = https.createServer(serverConfiguration.credentials, app);
     httpsServer.listen(serverConfiguration.httpsPort);
 }
 
