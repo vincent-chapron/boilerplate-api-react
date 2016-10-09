@@ -32,7 +32,7 @@ class ServerConfiguration {
             } else {
                 next();
             }
-        }
+        };
     }
 
     historyApiFallback() {
