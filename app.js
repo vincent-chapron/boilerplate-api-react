@@ -5,6 +5,7 @@ const http = require('http');
 const https = require('https');
 const express = require('express');
 const bodyParser = require('body-parser');
+const favicon = require('serve-favicon');
 
 const apiConfiguration = require('./configuration/api');
 const serverConfiguration = require('./configuration/server');
@@ -16,6 +17,10 @@ const app = express();
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'front', 'views'));
 
+console.log(app.get('env'));
+
+app.use(favicon(path.join(__dirname, 'front', 'public', 'favicon.ico')));
+app.use(serverConfiguration.logger(path.join(__dirname, 'logs')));
 app.use(serverConfiguration.redirectToSSL());
 app.use(serverConfiguration.historyApiFallback());
 app.use(bodyParser.json());
