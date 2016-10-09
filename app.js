@@ -25,8 +25,12 @@ app.use(express.static(path.join(__dirname, 'front', 'public')));
 
 if (serverConfiguration.credentials !== null) {
     const httpsServer = https.createServer(serverConfiguration.credentials, app);
-    httpsServer.listen(serverConfiguration.httpsPort);
+    httpsServer.listen(serverConfiguration.httpsPort, err => {
+        (err) ? console.log('ERROR: ', err) : console.log('HTTPS RUNNING ON PORT', serverConfiguration.httpsPort);
+    });
 }
 
 const httpServer = http.createServer(app);
-httpServer.listen(serverConfiguration.httpPort);
+httpServer.listen(serverConfiguration.httpPort, err => {
+    (err) ? console.log('ERROR: ', err) : console.log('HTTP RUNNING ON PORT', serverConfiguration.httpPort);
+});
