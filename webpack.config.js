@@ -4,9 +4,7 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-    entry: [
-        './front/src/index.js'
-    ],
+    entry: ['./front/src/index.js'],
     output: {
         path: path.join(__dirname, 'front', 'public'),
         publicPath: '/',
@@ -24,13 +22,7 @@ module.exports = {
             loader: 'json-loader'
         }]
     },
-    resolve: {
-        extensions: ['', '.js', '.jsx']
-    },
-    devServer: {
-        historyApiFallback: true,
-        contentBase: './public'
-    },
+    resolve: {extensions: ['', '.js', '.jsx']},
     node: {
         console: true,
         fs: 'empty',

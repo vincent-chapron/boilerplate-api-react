@@ -4,10 +4,13 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "dev": "babel-node app.js",
-    "start": "concurrently \"nodemon --ignore front/src --ignore front/public app.js\" \"webpack --watch\"",
-    "build:prod": "webpack --config webpack.production.config.js",
-    "serve": "npm run build:prod && echo build done. && node app.js"
+    "watch:react": "webpack --watch",
+    "watch:server": "nodemon --exec babel-node --ignore front/src --ignore front/public app.js",
+    "start": "concurrently \"npm run watch:react\" \"npm run watch:server\"",
+    "build:react": "webpack --config webpack.react.config.js",
+    "build:server": "webpack --config webpack.server.config.js",
+    "build:prod": "npm run build:react && npm run build:server",
+    "serve": "npm run build:prod && node app.min.js"
   },
   "keywords": [],
   "author": "",
