@@ -1,7 +1,6 @@
 import Rx from 'rx';
 import React from 'react';
 import promise from 'redux-promise';
-import createMemoryHistory from 'history/createMemoryHistory';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { match, RouterContext, Router, browserHistory } from 'react-router';
