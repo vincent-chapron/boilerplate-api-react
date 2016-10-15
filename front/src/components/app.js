@@ -1,20 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 import * as actions from '../actions';
 
 class App extends Component {
     componentWillMount() {
-        this.props.getHello('user');
+        this.props.getHello('Default');
+    }
+
+    static fetchData({store}) {
+        return store.dispatch(actions.getHello('Default'));
     }
 
     render() {
         return (
             <div>
                 <h1>React + API Boilerplate</h1>
-                <p>
+                <div>
                     {this.props.hello.sentence}
-                </p>
+                </div>
+                <div>
+                    <Link to="/posts">Tous les articles</Link>
+                </div>
+                <div>
+                    {this.props.children}
+                </div>
             </div>
         );
     }

@@ -1,8 +1,6 @@
-'use strict';
+import express from 'express';
 
-const express = require('express');
-
-const helloRoutes = require('./routes/hello');
+import helloRoutes from './routes/hello';
 
 let routes = express.Router();
 
@@ -11,4 +9,4 @@ let routes = express.Router();
  */
 routes.use('/hello', helloRoutes);
 
-module.exports = routes;
+export default routes;

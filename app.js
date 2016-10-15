@@ -1,30 +1,31 @@
-'use strict';
+import path from 'path';
+import http from 'http';
+import https from 'https';
+import express from 'express';
+import bodyParser from 'body-parser';
+import favicon from 'serve-favicon';
 
-const path = require('path');
-const http = require('http');
-const https = require('https');
-const express = require('express');
-const bodyParser = require('body-parser');
-const favicon = require('serve-favicon');
-
-const apiConfiguration = require('./configuration/api');
-const serverConfiguration = require('./configuration/server');
-const apiRoutes = require('./api/routes');
-const frontRoutes = require('./front/routes');
+import apiRoutes from './api/routes';
+import frontRoutes from './front/routes';
+import serverConfiguration from './configuration/server';
+import { handleRender } from './configuration/react';
+import { PREFIX } from './configuration/api';
 
 const app = express();
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'front', 'views'));
 
-console.log(app.get('env'));
-
 app.use(favicon(path.join(__dirname, 'front', 'public', 'favicon.ico')));
 app.use(serverConfiguration.logger(path.join(__dirname, 'logs')));
 app.use(serverConfiguration.redirectToSSL());
-app.use(serverConfiguration.historyApiFallback());
+app.use(handleRender);
+/**
+ * historyApiFallback not necessary if react server rending is enable.
+ * app.use(serverConfiguration.historyApiFallback());
+ */
 app.use(bodyParser.json());
-app.use(apiConfiguration.prefix, apiRoutes);
+app.use(PREFIX, apiRoutes);
 app.use(frontRoutes);
 app.use(express.static(path.join(__dirname, 'front', 'public')));
 

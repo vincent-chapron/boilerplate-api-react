@@ -1,0 +1,9 @@
+doctype html
+html(lang="fr")
+  head
+    title= title
+  body
+    div#container!= html
+    script.
+        window.__REDUX_STATE__ = '!{state}';
+    script(type="text/javascript" src="/bundle.js")

@@ -1,3 +1,1 @@
-module.exports = {
-    prefix: process.env.APP_API_PREFIX || '/api'
-};
+export const PREFIX = process.env.APP_API_PREFIX || '/api';

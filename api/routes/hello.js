@@ -1,6 +1,4 @@
-'use strict';
-
-const express = require('express');
+import express from 'express';
 
 let routes = express.Router();
 
@@ -8,4 +6,4 @@ routes.get('/:name', (req, res, next) => {
     res.json({name: `hello ${req.params.name} !`});
 });
 
-module.exports = routes;
+export default routes;

@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "dev": "babel-node app.js",
     "start": "concurrently \"nodemon --ignore front/src --ignore front/public app.js\" \"webpack --watch\"",
     "build:prod": "webpack --config webpack.production.config.js",
     "serve": "npm run build:prod && echo build done. && node app.js"
@@ -24,9 +25,11 @@
     "react-router": "^2.8.1",
     "redux": "^3.6.0",
     "redux-promise": "^0.5.3",
+    "rx": "^4.1.0",
     "serve-favicon": "^2.3.0"
   },
   "devDependencies": {
+    "@types/rx": "^2.5.33",
     "babel-cli": "^6.16.0",
     "babel-core": "^6.17.0",
     "babel-loader": "^6.2.5",

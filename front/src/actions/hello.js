@@ -5,7 +5,7 @@
 
 import request from 'request';
 
-import {prefix} from '../../../configuration/api';
+import { PREFIX } from '../../../configuration/api';
 
 import {
     HELLO
@@ -14,7 +14,7 @@ import {
 export function getHello(name) {
     let rq = new Promise(done => {
         request({
-            url: `http://localhost:8080${prefix}/hello/${name}`,
+            url: `http://localhost:8080${PREFIX}/hello/${name}`,
             json: true
         }, (error, response, body) => {
             done({error, response, body});

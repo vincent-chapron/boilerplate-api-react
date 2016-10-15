@@ -1,12 +1,10 @@
-'use strict';
+import fs from 'fs';
+import path from 'path';
+import history from 'connect-history-api-fallback';
+import fileStreamRotator from 'file-stream-rotator';
+import logger from 'morgan';
 
-const fs = require('fs');
-const path = require('path');
-const history = require('connect-history-api-fallback');
-const fileStreamRotator = require('file-stream-rotator');
-const logger = require('morgan');
-
-const apiConfiguration = require('./api'); 
+import { PREFIX } from './api';
 
 class ServerConfiguration {
 
@@ -39,7 +37,7 @@ class ServerConfiguration {
     }
 
     historyApiFallback() {
-        let matchRoutes = new RegExp(`^${apiConfiguration.prefix}/?.*$`);
+        let matchRoutes = new RegExp(`^${PREFIX}/?.*$`);
 
         return history({
             rewrites: [{
@@ -68,4 +66,4 @@ class ServerConfiguration {
 
 }
 
-module.exports = new ServerConfiguration();
+export default new ServerConfiguration();

@@ -14,7 +14,10 @@ const INITIALE_STATE = {
 export default function (state = INITIALE_STATE, action) {
     switch (action.type) {
         case HELLO:
-            return {...state, sentence: action.payload.body.name};
+            if (action.payload.body) {
+                return {...state, sentence: action.payload.body.name};
+            }
+            return state;
         default:
             return state;
     }
